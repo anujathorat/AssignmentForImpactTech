@@ -1,6 +1,7 @@
 # AssignmentForImpactTech
 
-Features of the small proj :
+Angualar JS Login/Registration Form Validations
+Features of the project :
 1.	Custom directive is used to validate password.
 2.	DataService is used to Cascade between drop downs of Country and State.
 3.	All the form validation mentioned in the original Devskiller assignment are implemented as is.
