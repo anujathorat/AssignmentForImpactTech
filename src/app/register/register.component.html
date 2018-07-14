@@ -1,0 +1,88 @@
+﻿<div class="col-md-6 col-md-offset-3">
+    <h2>Sign up</h2>
+    <form name="form" (ngSubmit)="f.form.valid && register()" #f="ngForm" novalidate>
+        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
+            <label for="firstName">First Name</label>
+            <input type="text" class="form-control" name="firstName" [(ngModel)]="model.firstName" #firstName="ngModel" required />
+              <small [hidden]="firstName.valid || (firstName.pristine && !f.submitted)" class="text-danger">
+                First Name is required
+              </small>
+        </div>
+        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
+            <label for="lastName">Last Name</label>
+            <input type="text" class="form-control" name="lastName" [(ngModel)]="model.lastName" #lastName="ngModel" required />
+            <small [hidden]="lastName.valid || (lastName.pristine && !f.submitted)" class="text-danger">
+                Last Name is required
+              </small>
+        </div>
+        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" name="username" [(ngModel)]="model.username" #username="ngModel" required />
+            <small [hidden]="username.valid || (username.pristine && !f.submitted)" class="text-danger">
+                Username Name is required
+              </small>
+        </div>
+        <div class="form-group">
+            <label for="">Email</label>
+            <input type="email" class="form-control" name="email" [ngModel]="model.email" 
+              required  #email="ngModel" pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$">
+            <small [hidden]="email.valid || (email.pristine && !f.submitted)" class="text-danger">
+              Email is required and format should be <i>thoratanuja2890@gmail.com</i>.
+            </small>
+
+           
+            <!--<pre *ngIf="email.errors" class="margin-20">{{ email.errors | json }}</pre>-->
+          </div>
+          <div class="form-group">
+            <label for="name">Mobile Number</label>
+            <input type="text" class="form-control" id="phoneNumber"
+            required
+            [(ngModel)]="model.phoneNumber" name="phoneNumber"
+            pattern="^\(?([1-9]?[0-9]{2})\)?[-]?([0-9]{3})[-]?([0-9]{4})"
+            #phoneNumber="ngModel">
+            <div [hidden]="phoneNumber.valid|| (phoneNumber.pristine && !f.submitted)"
+            class="text-danger">
+
+                <small class="text-danger" [hidden]="!phoneNumber.hasError('required')">Mobile is required</small>
+               <small class="text-danger" [hidden]="!phoneNumber.hasError('pattern')">Mobile numberr should be in format (#99)-999-9999, Here # is non zero number.</small>
+            </div>
+         </div>
+       
+       
+        <div class="form-group">
+            <label for="">Password</label>
+            <input type="password" class="form-control" name="password" [ngModel]="model.password" 
+              required validateEqual="confirmPassword" reverse="true"
+              pattern="^(?=.*?[A-Z]).{8,}$"
+              #password="ngModel">
+              <small class="text-danger" [hidden]="!password.hasError('required') || (password.pristine && !f.submitted)">Password is required</small>
+            <small class="text-danger"  [hidden]="!password.hasError('pattern') ||  (password.pristine && !f.submitted)" >Password should contain minimum 8 letters, numbers, at least one upper case.</small>
+            <!--<pre *ngIf="password.errors" class="margin-20">{{ password.errors | json }}</pre>-->
+          </div>
+          <div class="form-group">
+            <label for="">Retype password</label>
+            <input type="password" class="form-control" name="confirmPassword" [ngModel]="model.confirmPassword" 
+              required validateEqual="password" reverse="false" #confirmPassword="ngModel">
+            <small [hidden]="confirmPassword.valid || (confirmPassword.pristine && !f.submitted)" class="text-danger">
+              Password mismatch
+            </small>
+
+          
+            <!--<pre *ngIf="confirmPassword.errors" class="margin-20">{{ confirmPassword.errors | json }}</pre>-->
+          </div>
+          <br>
+          
+     
+        <app-countrylistcomponent></app-countrylistcomponent>
+        <br>
+        <br>
+        <div class="form-group">
+            <button [disabled]="loading" class="btn btn-primary">Register</button>
+            <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+            <a [routerLink]="['/login']" class="btn btn-link">Cancel</a>
+        </div>
+
+       
+    </form>
+
+</div>
