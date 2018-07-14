@@ -1,6 +1,8 @@
 # AssignmentForImpactTech
 
-Angualar JS Login/Registration Form Validations
+Angualar JS Login/Registration Form Validations  
+
+
 Features of the project :
 1.	Custom directive is used to validate password.
 2.	DataService is used to Cascade between drop downs of Country and State.
